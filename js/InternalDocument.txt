@@ -1,0 +1,206 @@
+Technical Document
+
+###########################################################################
+Byron spritesheet - assets/images/player/byronAlone.png
+64x64 (13 sprite per row)
+move left   :  9 / 0-9
+move right  : 11 / 0-9
+cast left   :  1 / 0-7
+cast right  :  3 / 0-7
+attack left : 13 / 0-6
+attack right: 15 / 0-6
+stand left  :  9 / 0
+stand right : 11 / 0
+jump left   :  9 / 1
+jump right  : 11 / 1
+die         : 20 / 0-6
+
+Weapon spritesheet 
+assets/images/player/rapier.png   -   assets/images/player/sword.png
+192x192
+left  :  7 - 12
+right : 19 - 24
+
+Fairy spritesheet
+assets/images/player/fairy.png
+64x50
+stand : 0
+left  : 1,2,3,4
+right : 5,6,7,8
+
+Archer spritesheet
+assets/images/enemies/orcMale.png
+(see Byron)
+shoot left  : 17 / 0-11
+shoot right : 19 / 0-11
+
+Fighter spritesheet
+assets/images/enemies/orcFemale.png
+(see Byron)
+
+Weapon Fighter spritesheet
+assets/images/enemies/saber.png
+(see Weapon)
+
+Skeleton spritesheet
+assets/images/enemies/skeleton.png
+(see Byron)
+spearLeft   : 5 / 0 - 7
+spearRight  : 7 / 0 - 7
+
+Weapon skeleton spritesheet
+assets/images/enemies/spear.png
+192x192
+attackLeft  :  8 - 15
+attackRight : 24 - 31
+
+Crocodile spritesheet
+assets/image/enemies/crocodile.png
+64x48
+
+
+Bee spritesheet
+assets/images/enemies/bee.png
+34x34
+left         : 0,1,2
+right        : 3,4,5
+attack left  : 1
+attack right : 4
+
+Coso verde spritesheet
+assets/images/enemies/cosoVerdeFull.png
+assets/images/enemies/cosoVerdeFull.json
+64x57
+moveLeft    : left1  - left16
+moveRight   : right1 - right16
+attackLeft  : left17  - left24
+attackRight : right17 - right24
+
+Libellula spritesheet
+assets/images/enemies/libellula.png
+80x64
+moveLeft  : 0 - 2
+moveRight : 3 - 5
+
+Wakwak spritesheet
+assets/images/enemies/wakwakFull.png
+assets/images/enemies/wakwakFull.json
+169x169
+moveRight   :  right1 - right4
+moveLeft    :  left1  - left4
+attackLeft  :  left5  - left12
+attackRight :  right5 - right12
+
+Orologio spritesheet
+assets/images/enemies/orologio.png
+247x110
+moveLeft    :   left1 - left16
+moveRight   :  right1 - right16
+attackLeft  :  left17 - left32
+attackRight : right17 - right32
+
+###########################################################################
+PROPERTIES TO INSERT IN TILED
+Byron:
+	type    = Byron
+	group   = players
+	texture = byron
+
+Fairy:
+	type      = helper
+	group     = signs
+	texture   = fairy
+	direction = [-1 left, 1 right]
+Item:
+	type    = item
+	group   = items
+	static  = true
+	texture = [texture name]
+
+TutorialSign:
+	type    = sign
+	group   = signs
+	text    = [desired text]
+	texture = signboard
+
+Goal:
+	type   = goal
+	group  = signs
+	teture = goal
+
+For all enemies can be set:
+	maxDistance = [number- max 400]
+	direction   = [-1 left, 1 right]
+	attackRate  = [millis between attacks]
+
+Slime:
+	type      = blob
+	group     = enemies
+	texture   = slime
+	bodySizeH = 15
+	bodySizeW = 30
+	health    = 2
+
+Bee:
+	type           = flyingEnemy
+	group          = enemies
+	texture        = bee
+	bodySizeH      = 28
+	bodySizeW      = 28
+	health         = 2
+	attackDistance = 200
+	altitude       = 3 [tile below untill floor]
+
+Libellula:
+	type           = flyingEnemy
+	group          = enemies
+	texture        = bee
+	bodySizeH      = 35
+	bodySizeW      = 70
+	health         = 2
+	attackDistance = 200
+	altitude       = 3 [tile below untill floor]
+	attacksNum     = 2
+
+Green1:
+	type           = flyingEnemyCloseRange
+	group          = enemies
+	texture        = cosoVerde
+	bodySizeH      = 40
+	bodySizeW      = 30
+	health         = 2
+	attackDistance = 200
+	altitude       = 3 [tile below untill floor]
+
+Fighter:
+	type           = fighter
+	group          = enemies
+	texture        = orcFighter
+	bodySizeH      = 48
+	bodySizeW      = 24
+	health         = 3
+	attackDistance = 200
+
+Skeleton:
+	(look at Fighter)
+
+Arhcer:
+	type           = archer
+	group          = enemies
+	texture        = orcFighter
+	bodySizeH      = 48
+	bodySizeW      = 24
+	health         = 2
+	attackDistance = 500
+
+Crocodile:
+	type      = blob
+	group     = enemies
+	texture   = crocodile
+	bodySizeH = 20
+	bodySizeW = 60
+	health    = 3
+
+###########################################################################
+COMPILING  
+java -jar compiler.jar --js **.js states/**.js objects/**.js objects/enemies/**.js objects/characters/**.js --js_output_file BA_game_min.js
